@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 //routes for /
 app.get('/', (req, res) => {
-    res.json({ message: 'Hello, welcome to API 2nd session' });
+    res.json({ message: 'Hello, welcome to Assignment for Day27' });
 });
 
 //Exporting the Express app for use in other modules
