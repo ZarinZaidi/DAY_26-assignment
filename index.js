@@ -21,9 +21,32 @@ app.use((req, res, next) => {
     next();
 });
 
+//Import the routes for items
+const itemRoutes = require("./routes/items");
+
+//Routes setup
+app.use("/items", itemRoutes); //Assigning routes for items
+
 //routes for /
 app.get('/', (req, res) => {
     res.json({ message: 'Hello, welcome to Assignment for Day27' });
+});
+
+//Middleware to handle 404 errors
+app.use((req, res, next) => {
+    const error = new Error("Not found");
+    error.status = 404;
+    next(error);//to pass to other middleware
+})
+
+//Middleware to handle 500 errors
+app.use((req, res, next) => {
+    req.status(error.status || 500); //Set response status based on error status received or default to 500 (Internal server error)
+    req.json({
+        error: {
+            message: error.message
+        }
+    }); //Send JSON response with error message
 });
 
 //Exporting the Express app for use in other modules
